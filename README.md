@@ -26,7 +26,4 @@
 **Author:**
 - Julio Cezar Paiva
 
-**Acknowledgments:**
-- [You can acknowledge any libraries, resources, or inspirations here.]
-
 Explore your favorite music albums, keep track of your reviews, and discover new music with "Did I Liked It?"
