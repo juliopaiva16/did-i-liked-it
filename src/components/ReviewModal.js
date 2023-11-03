@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
-
-// Function to search for albums using the Deezer API
-const searchAlbums = async (query) => {
-  try {
-    const response = await fetch(`https://api.deezer.com/search/album/?q=${query}`);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    const data = await response.json();
-    return data.data; // Assuming the albums data is in the 'data' property of the response
-  } catch (error) {
-    console.error('Error fetching albums:', error);
-    return [];
-  }
-};
+import './ReviewModal.css';
 
 const ReviewModal = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState(null);
 
+  const searchAlbums = async (query) => {
+    // Make a request to Deezer API to search for albums
+    // using proxy server to avoid CORS issue (see package.json)
+    return fetch(
+      '/search/album/?q=' + query);
+  }
+
   // Function to handle the search request to Deezer API
   const handleSearch = async () => {
     try {
       const results = await searchAlbums(searchQuery);
-      setSearchResults(results);
+      // Convert the response body from readable stream to JSON
+      const response = await results.json();
+      console.log(response);
+      // Update searchResults state with the data
+      setSearchResults(response.data);
     } catch (error) {
       console.error('Error searching for albums:', error);
     }
@@ -58,9 +55,10 @@ const ReviewModal = () => {
           <div className="search-results">
             {searchResults.map((album) => (
               <div key={album.id} onClick={() => handleSelectAlbum(album)}>
-                <img src={album.cover} alt={album.title} />
+                <img src={album.cover_medium} alt={album.title} />
                 <div>{album.title}</div>
                 <div>{album.artist.name}</div>
+                <div>Release Year: {album.release_date}</div>
               </div>
             ))}
           </div>
