@@ -72,6 +72,8 @@ function App() {
       <h1 className='app-font-logo'>Did I Liked it?</h1>
       <Search onSearch={handleSearch} />
       <Table data={searchResults} />
+      <button onClick={toggleReviewModal}>Add Review</button>
+      {isReviewModalOpen && <ReviewModal />}
     </Layout>
   );
 }
