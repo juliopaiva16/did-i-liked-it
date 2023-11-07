@@ -1,23 +1,25 @@
 // src/components/Search.js
-import React, { useState } from 'react';
+import React from 'react';
 import './Search.css';
 
-const Search = ({ onSearch }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const Search = ({ onSearch, searchTerm, onChange, closeCallback }) => {
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      onSearch(searchTerm);
+      onSearch();
+    }
+    if (event.key === 'Escape') {
+      closeCallback();
     }
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-bar static-neomorph">
       <input
         type="text"
         placeholder="Search by album or artist"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => onChange(e.target.value)}
         onKeyPress={handleKeyPress}
       />
     </div>

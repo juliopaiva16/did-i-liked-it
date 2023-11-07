@@ -28,13 +28,17 @@ const Table = ({ data }) => {
                     <img src={item.albumCover} alt="Album Cover" />
                 </div>
             </td>
-            <td>{item.artistName}</td>
-            <td>{item.albumName}</td>
+            <td>
+              <a href={item.artistLink}>{item.artistName}</a>
+            </td>
+            <td>
+              <a href={item.albumLink}>{item.albumName}</a>
+            </td>
             <td>{item.albumReleaseYear}</td>
             <td>{item.dateOfReview}</td>
-            <td>{item.songsScore}</td>
-            <td>{item.albumScore}</td>
-            <td>{item.overallScore}</td>
+            <td>{item.songsScore.toFixed(1)}</td>
+            <td>{item.albumScore.toFixed(1)}</td>
+            <td>{item.overallScore.toFixed(1)}</td>
           </tr>
         ))}
       </tbody>

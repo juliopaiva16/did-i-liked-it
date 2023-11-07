@@ -1,14 +1,4 @@
 /* src/components/Table.css */
-.album-cover {
-    width: 70px; /* Adjust the size as needed */
-    height: 70px; /* Adjust the size as needed */
-    border-radius: 10px; /* Controls the roundness; adjust as needed */
-    overflow: hidden; /* Clip the image within the rounded square */
-    background-color: #b64201; /* Set the background color to a light gray; adjust as needed */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .cover-line {
     display: flex;
@@ -17,13 +7,32 @@
 }
   
 table {
-    border-collapse: collapse;
+    display: flex;
+    flex-flow: column;
+    height: 600px;
     width: 100%;
 }
 
-td {
-    text-align: left;
-    /* Adds a margin to space the lines vertically */
-    padding: 5px 10px;
+table thead {
+    /* head takes the height it requires, 
+    and it's not scaled when table is resized */
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+}
+
+table tbody {
+    /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+}
+
+table tbody tr {
+    width: 100%;
+}
+
+table thead, table tbody tr {
+    display: table;
+    table-layout: fixed;
 }
   
